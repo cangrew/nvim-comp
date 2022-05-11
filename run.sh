@@ -1,0 +1,3 @@
+
+nvim --cmd "set rtp+=./"
+
