@@ -29,4 +29,6 @@ function M.compile(use_term)
   end
 end
 
+Cmds.init()
+
 return M
