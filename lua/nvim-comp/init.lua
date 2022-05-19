@@ -21,9 +21,9 @@ function M.compile(use_term)
     Buff_table[b_id] = create_buff()
   end
 
-  if use_term == true then
+  if use_term == 1 then
     Comp.compile_term(Buff_table[b_id])
-  elseif use_term == false then
+  elseif use_term == 0 then
     Comp.compile(Buff_table[b_id])
   end
 end
