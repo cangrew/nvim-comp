@@ -1,6 +1,6 @@
 
 local Comp = require "nvim-comp.nvim-comp"
-local Cmds = require "commands"
+local Cmds = require "nvim-comp.commands"
 
 local M = {}
 local Buff_table = {}
