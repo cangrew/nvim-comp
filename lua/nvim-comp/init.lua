@@ -1,6 +1,6 @@
 
 local Comp = require "nvim-comp.nvim-comp"
-require "commands"
+local Cmds = require "commands"
 
 local M = {}
 local Buff_table = {}
@@ -29,6 +29,6 @@ function M.compile(use_term)
   end
 end
 
-
+Cmds.init()
 
 return M
