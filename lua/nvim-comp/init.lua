@@ -1,27 +1,33 @@
 
-local type_tbl = {
-  ["c"] = 'gcc',
-  ["cpp"] = 'g++',
-}
+local Comp = require "nvim-comp.nvim-comp"
 
-local function compile()
-  local file = vim.fn.expand("%:p")
-  local file_o = vim.fn.expand("%:p:r")
-  local filepath = vim.fn.expand("%:p:h") .. '/'
-  local file_exe = './' .. vim.fn.expand("%:t:r")
-  local file_x = vim.fn.expand("%:e")
+local M = {}
+local Buff_table = {}
 
-  vim.cmd("vsplit | terminal")
+local function create_buff()
+  local b = {}
+  Comp.init(b)
+  return b
+end
 
-  local compiler = type_tbl[file_x]
-  local comp = ':call jobsend(b:terminal_job_id, "' .. compiler .. ' ' .. file .. ' -o ' .. file_o .. '\\n")'
-  local run = ':call jobsend(b:terminal_job_id, "' .. filepath .. file_exe .. '\\n")'
+local function delete_buff(b_id)
+  Buff_table[b_id] = nil
+end
+
+function M.compile(use_term)
+  local b_id = vim.api.nvim_get_current_buf()
   
-  vim.cmd(comp)
-  vim.cmd(run)
+  if Buff_table[b_id] == nil then
+    Buff_table[b_id] = create_buff()
+  end
+
+  if use_term == true then
+    Comp.compile_term(Buff_table[b_id])
+  elseif use_term == false then
+    Comp.compile(Buff_table[b_id])
+  end
 end
 
 
-return {
-  compile = compile,
-}
+
+return M
