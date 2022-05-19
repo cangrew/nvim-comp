@@ -1,5 +1,6 @@
 
 local Comp = require "nvim-comp.nvim-comp"
+require "nvim-comp.commands"
 
 local M = {}
 local Buff_table = {}
@@ -16,7 +17,7 @@ end
 
 function M.compile(use_term)
   local b_id = vim.api.nvim_get_current_buf()
-  
+
   if Buff_table[b_id] == nil then
     Buff_table[b_id] = create_buff()
   end
